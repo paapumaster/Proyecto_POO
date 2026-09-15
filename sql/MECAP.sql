@@ -110,3 +110,10 @@ CREATE TABLE parametros(
 
 
 ALTER TABLE parametros ADD habilitado TINYINT NOT NULL DEFAULT 1; 
+
+CREATE TABLE vehiculos(
+    id_vehiculo INTEGER AUTO_INCREMENT,
+    tipo_combustible INTEGER,
+    tipo_vehiculo INTEGER,
+) COMMENT = 'Información de vehiculos de clientes';
+
