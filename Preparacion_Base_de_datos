@@ -1,0 +1,23 @@
+📌 Guía de ejecución del proyecto
+1. Iniciar los servicios
+Abre XAMPP (o tu gestor de base de datos) y presiona Start en MySQL.
+
+Asegúrate de que la base de datos plataforma_noticias esté creada en MySQL con sus tablas y datos cargados.
+
+2. Abrir la terminal en VS Code
+Asegúrate de estar ubicado en la carpeta raíz del proyecto (Proyecto_POO).
+Si no estás en la carpeta, usa:
+
+PowerShell
+cd "C:\Users\laboratorio2\Nueva carpeta\Proyecto_POO"
+3. Ejecutar el programa
+En la consola de PowerShell, ejecuta el siguiente comando para correr el archivo principal respetando los paquetes del proyecto:
+
+PowerShell
+python -m presentacion.main
+4. Ingresar al sistema (Login)
+Cuando el programa pida credenciales, ingresa los datos de un usuario registrado en la base de datos:
+
+Email: juan.periodista@prensa.com
+
+Contraseña: $2y$10$abcdef1234567890demo1
