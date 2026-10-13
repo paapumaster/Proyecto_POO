@@ -9,8 +9,8 @@ def obtener_conexion():
         conexion = mysql.connector.connect(
             host='localhost',
             port=3306,
-            user='sebamaster',
-            password='seba123',
+            user='root',
+            password='',
             database='plataforma_noticias'
         )
         if conexion.is_connected():
@@ -18,3 +18,7 @@ def obtener_conexion():
     except Error as e:
         print(f"Error de conexión a la base de datos: {e}")
         return None
+
+
+
+
