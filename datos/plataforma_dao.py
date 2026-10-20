@@ -13,6 +13,9 @@ class PlataformaDAO:
             cursor.execute(sql, (email,))
             usuario = cursor.fetchone()
             return usuario
+        except Exception as e:
+            print(f"Error al obtener usuario: {e}")
+            return None
         finally:
             conexion.close()
 
@@ -55,6 +58,10 @@ class PlataformaDAO:
             cursor.execute(sql, (nuevo_estado, noticia_id))
             conexion.commit()
             return cursor.rowcount > 0
+        except Exception as e:
+            conexion.rollback()
+            print(f"Error al cambiar estado de la noticia: {e}")
+            return False
         finally:
             conexion.close()
 
@@ -73,6 +80,9 @@ class PlataformaDAO:
             """
             cursor.execute(sql, (estado,))
             return cursor.fetchall()
+        except Exception as e:
+            print(f"Error al listar noticias: {e}")
+            return []
         finally:
             conexion.close()
 
@@ -87,5 +97,9 @@ class PlataformaDAO:
             cursor.execute(sql, (noticia_id, usuario_id, comentario))
             conexion.commit()
             return True
+        except Exception as e:
+            conexion.rollback()
+            print(f"Error al agregar comentario: {e}")
+            return False
         finally:
             conexion.close()
