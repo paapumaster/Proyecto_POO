@@ -1,3 +1,4 @@
+import bcrypt
 from datos.plataforma_dao import PlataformaDAO
 from modelos.usuario import Usuario
 from modelos.noticia import Noticia
@@ -6,11 +7,33 @@ class SistemaNoticias:
 
     @staticmethod
     def iniciar_sesion(email, password):
-        # Obtiene el diccionario del DAO
         dic_usuario = PlataformaDAO.obtener_usuario_por_email(email)
-        if dic_usuario and dic_usuario['password'] == password:
-            # Retorna un Objeto Usuario en lugar de un diccionario plano
-            return Usuario.desde_diccionario(dic_usuario)
+        if not dic_usuario:
+            return None
+        
+        hash_guardado = dic_usuario['password']
+        
+        # 1. Si la contraseña en la BD está en texto plano (ej: '1234')
+        if not hash_guardado.startswith('$2'):
+            if hash_guardado == password:
+                return Usuario.desde_diccionario(dic_usuario)
+            return None
+
+        # 2. Si es un hash cifrado (bcrypt)
+        try:
+            # Adaptar formato PHP ($2y$) a Python ($2b$)
+            if hash_guardado.startswith('$2y$'):
+                hash_guardado = hash_guardado.replace('$2y$', '$2b$', 1)
+            
+            password_bytes = password.encode('utf-8')
+            hash_bytes = hash_guardado.encode('utf-8')
+            
+            if bcrypt.checkpw(password_bytes, hash_bytes):
+                return Usuario.desde_diccionario(dic_usuario)
+        except Exception as e:
+            # Evita que falle si algún hash de prueba tiene un salt inválido
+            print(f"Aviso de formato de contraseña: {e}")
+            
         return None
 
     @staticmethod
@@ -27,7 +50,6 @@ class SistemaNoticias:
 
     @staticmethod
     def obtener_noticias_publicadas():
-        # Convierte cada diccionario de la lista en un Objeto Noticia
         diccionarios = PlataformaDAO.listar_noticias_por_estado('publicada')
         return [Noticia.desde_diccionario(d) for d in diccionarios]
 
