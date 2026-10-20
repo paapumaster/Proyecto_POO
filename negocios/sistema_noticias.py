@@ -1,12 +1,16 @@
 from datos.plataforma_dao import PlataformaDAO
+from modelos.usuario import Usuario
+from modelos.noticia import Noticia
 
 class SistemaNoticias:
 
     @staticmethod
     def iniciar_sesion(email, password):
-        usuario = PlataformaDAO.obtener_usuario_por_email(email)
-        if usuario and usuario['password'] == password:
-            return usuario
+        # Obtiene el diccionario del DAO
+        dic_usuario = PlataformaDAO.obtener_usuario_por_email(email)
+        if dic_usuario and dic_usuario['password'] == password:
+            # Retorna un Objeto Usuario en lugar de un diccionario plano
+            return Usuario.desde_diccionario(dic_usuario)
         return None
 
     @staticmethod
@@ -23,11 +27,14 @@ class SistemaNoticias:
 
     @staticmethod
     def obtener_noticias_publicadas():
-        return PlataformaDAO.listar_noticias_por_estado('publicada')
+        # Convierte cada diccionario de la lista en un Objeto Noticia
+        diccionarios = PlataformaDAO.listar_noticias_por_estado('publicada')
+        return [Noticia.desde_diccionario(d) for d in diccionarios]
 
     @staticmethod
     def obtener_noticias_en_revision():
-        return PlataformaDAO.listar_noticias_por_estado('en_revision')
+        diccionarios = PlataformaDAO.listar_noticias_por_estado('en_revision')
+        return [Noticia.desde_diccionario(d) for d in diccionarios]
 
     @staticmethod
     def comentar(noticia_id, lector_id, texto):

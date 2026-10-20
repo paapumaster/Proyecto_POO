@@ -3,7 +3,7 @@ from negocios.sistema_noticias import SistemaNoticias
 
 def menu_periodista(usuario):
     while True:
-        print(f"\n--- MENÚ PERIODISTA ({usuario['nombre']}) ---")
+        print(f"\n--- MENÚ PERIODISTA ({usuario.nombre}) ---")
         print("1. Crear borrador de noticia")
         print("2. Enviar noticia a revisión")
         print("3. Cerrar sesión")
@@ -12,7 +12,7 @@ def menu_periodista(usuario):
         if opcion == '1':
             titulo = input("Título de la noticia: ")
             contenido = input("Contenido: ")
-            id_noticia = SistemaNoticias.crear_noticia_borrador(titulo, contenido, usuario['id'])
+            id_noticia = SistemaNoticias.crear_noticia_borrador(titulo, contenido, usuario.id)
             if id_noticia:
                 print(f"Noticia creada exitosamente en borrador (ID: {id_noticia}).")
             else:
@@ -28,7 +28,7 @@ def menu_periodista(usuario):
 
 def menu_editor(usuario):
     while True:
-        print(f"\n--- MENÚ EDITOR ({usuario['nombre']}) ---")
+        print(f"\n--- MENÚ EDITOR ({usuario.nombre}) ---")
         print("1. Ver noticias pendientes de revisión")
         print("2. Publicar noticia")
         print("3. Cerrar sesión")
@@ -38,7 +38,7 @@ def menu_editor(usuario):
             noticias = SistemaNoticias.obtener_noticias_en_revision()
             print("\n--- NOTICIAS EN REVISIÓN ---")
             for n in noticias:
-                print(f"ID: {n['id']} | Título: {n['titulo']}")
+                print(f"ID: {n.id} | Título: {n.titulo}")
         elif opcion == '2':
             noticia_id = input("Ingrese el ID de la noticia a publicar: ")
             if SistemaNoticias.publicar_noticia(noticia_id):
@@ -50,7 +50,7 @@ def menu_editor(usuario):
 
 def menu_lector(usuario):
     while True:
-        print(f"\n--- MENÚ LECTOR ({usuario['nombre']}) ---")
+        print(f"\n--- MENÚ LECTOR ({usuario.nombre}) ---")
         print("1. Leer noticias publicadas")
         print("2. Comentar una noticia")
         print("3. Cerrar sesión")
@@ -60,11 +60,11 @@ def menu_lector(usuario):
             noticias = SistemaNoticias.obtener_noticias_publicadas()
             print("\n--- NOTICIAS PUBLICADAS ---")
             for n in noticias:
-                print(f"ID: {n['id']} | {n['titulo']}\n   {n['contenido']}\n")
+                print(f"ID: {n.id} | {n.titulo}\n   {n.contenido}\n")
         elif opcion == '2':
             noticia_id = input("ID de la noticia a comentar: ")
             comentario = input("Escriba su comentario: ")
-            if SistemaNoticias.comentar(noticia_id, usuario['id'], comentario):
+            if SistemaNoticias.comentar(noticia_id, usuario.id, comentario):
                 print("Comentario publicado.")
             else:
                 print("Error al publicar comentario.")
@@ -82,9 +82,9 @@ def main():
         return
 
     # Redirección según rol (1: Admin, 2: Periodista, 3: Editor, 4: Lector)
-    if usuario['rol_id'] in (1, 2):
+    if usuario.rol_id in (1, 2):
         menu_periodista(usuario)
-    elif usuario['rol_id'] == 3:
+    elif usuario.rol_id == 3:
         menu_editor(usuario)
     else:
         menu_lector(usuario)
