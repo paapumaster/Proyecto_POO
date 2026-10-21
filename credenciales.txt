@@ -20,7 +20,7 @@
 Para probar los diferentes roles en el sistema, puedes utilizar los siguientes usuarios:
 
 * **Profesor Evaluador (Rol Periodista/Editor):**
-  * **Email:** `profesor@colegio.cl`
+  * **Email:** `profesor@inacap.cl`
   * **Contraseña:** `Profe2026*`
 
 * **Usuarios de Prueba (Lectores / Periodistas):**

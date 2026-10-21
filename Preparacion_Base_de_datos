@@ -20,10 +20,6 @@ Cuando el programa pida credenciales, ingresa los datos de un usuario registrado
 
 Email: juan.periodista@prensa.com
 
-Contraseña: $2y$10$abcdef1234567890demo1
+Contraseña: 123456
 
-
-
-si da error de conexion a la base de datos, tienes que ir a /datos/conexion.py y luego cambiar 
-el usuario que dice sebamaster y poner root y en password poner sin contraseña "" para poder conectar a la base de datos exitosamente
 
