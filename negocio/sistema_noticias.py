@@ -1,7 +1,7 @@
 import bcrypt
 from datos.plataforma_dao import PlataformaDAO
-from modelos.usuario import Usuario
-from modelos.noticia import Noticia
+from datos.modelos.usuario import Usuario
+from datos.modelos.noticia import Noticia
 
 class SistemaNoticias:
 

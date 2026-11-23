@@ -1,0 +1,7 @@
+MSG_LOGIN_EXITO = "\nInicio de sesión exitoso."
+MSG_LOGIN_FALLO = "Correo o contraseña incorrectos. Intente nuevamente."
+MSG_SIN_ACCESO = "Acceso denegado: debe iniciar sesión para continuar."
+MSG_OPERACION_OK = "Operación realizada con éxito."
+MSG_NO_ENCONTRADO = "No se encontró el registro solicitado."
+MSG_DATOS_INVALIDOS = "Datos inválidos o incompletos. Revise e intente nuevamente."
+MSG_SALIDA = "\nCerrando sesión y saliendo del sistema..."

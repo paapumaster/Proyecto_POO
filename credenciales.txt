@@ -10,7 +10,7 @@
    pip install -r requirements.txt
 
 3. Ejecutar la aplicación:
-   python -m presentacion.main
+   python main.py
 
 
 

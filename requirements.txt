@@ -1,4 +1,4 @@
-mysql-connector-python
-peewee
-pymysql
-bcrypt
+peewee>=3.17.0
+bcrypt>=4.1.0
+maskpass>=0.3.7
+pymysql>=1.1.0
